@@ -1,0 +1,16 @@
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int t1, t2, t3;
+    printf("Enter three values: ");
+    scanf("%d %d %d", &t1, &t2, &t3);
+
+ // Обчислюємо загальний час в годинах
+    double total_time = t1 + t2 + t3;
+    total_time = round(total_time * 100) / 100;
+ // Виводимо результат з округленням до 2 знаків після коми
+    printf("Time required to eat the pie: %.2lf hours\n", total_time);
+
+    return 0;
+}
