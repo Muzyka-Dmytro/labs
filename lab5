@@ -1,0 +1,30 @@
+#include <stdio.h>
+
+const int MOD = 12345;
+
+// Функція для підрахунку кількості шуканих послідовностей
+int countSequences(int n) {
+    int dp[n+1];
+    dp[0] = 1; // Базовий випадок: 1 допустима послідовність довжиною 0
+    dp[1] = 2; // Базовий випадок: 2 допустимі послідовності довжиною 1 (0 або 1)
+    dp[2] = 4; // Базовий випадок: 4 допустимі послідовності довжиною 2 (00, 01, 10, 11)
+
+    for (int i = 3; i <= n; i++) {
+        // Обчислення кількості шуканих послідовностей довжиною i
+        // на основі попередніх значень
+        dp[i] = (dp[i-1] + dp[i-2] + dp[i-3]) % MOD;
+    }
+
+    return dp[n];
+}
+
+int main() {
+    int n;
+    printf("Enter the sequence length n: ");
+    scanf("%d", &n);
+
+    int result = countSequences(n);
+    printf("Number of searched sequences: %d\n", result);
+
+    return 0;
+}
