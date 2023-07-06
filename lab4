@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+// Функція для підрахунку кількості рівних дільників числа n
+int countEqualDivisors(int n) {
+    int count = 0;
+
+    // Перебираємо можливі значення дільників m від 1 до n-1
+    for (int m = 1; m < n; m++) {
+        // Обчислюємо частку та залишок від ділення n на m
+        int quotient = n / m;
+        int remainder = n % m;
+
+        // Якщо частка і залишок рівні, то m є рівним дільником числа n
+        if (quotient == remainder) {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    int n;
+    printf("Enter a natural number: ");
+    scanf("%d", &n);
+
+    int equalDivisors = countEqualDivisors(n);
+    printf("Number of equal divisors: %d\n", equalDivisors);
+
+    return 0;
+}
