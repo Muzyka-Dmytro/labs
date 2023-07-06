@@ -1,0 +1,36 @@
+#include <stdio.h>
+#include <math.h>
+
+int countIntersectionPoints(int x1, int y1, int r1, int x2, int y2, int r2) {
+    // Відстань між центрами коліс
+    double distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+
+    // Перевірка відносних розмірів коліс та їх взаємного розташування
+    if (distance > r1 + r2) {
+        // Кола не перетинаються
+        return 0;
+    } else if (distance < fabs(r1 - r2)) {
+        // Одне коло міститься всередині іншого
+        return 0;
+    } else if (distance == 0 && r1 == r2) {
+        // Кола збігаються, маємо безліч точок перетину
+        return -1;
+    } else {
+        // Обчислення кількості точок перетину
+        int intersectionPoints = 2;
+        return intersectionPoints;
+    }
+}
+
+int main() {
+    int x1, y1, r1, x2, y2, r2;
+    printf("Enter the coordinates and radius of the first circle: ");
+    scanf("%d %d %d", &x1, &y1, &r1);
+    printf("Enter the coordinates and radius of the second circle: ");
+    scanf("%d %d %d", &x2, &y2, &r2);
+
+    int result = countIntersectionPoints(x1, y1, r1, x2, y2, r2);
+    printf("Number of crossing points: %d\n", result);
+
+    return 0;
+}
