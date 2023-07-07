@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// Функція для обчислення факторіалу
+int factorial(int n) {
+    int result = 1;
+    for (int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    return result;
+}
+
+// Функція для обчислення кількості анаграм з заданого слова
+int countAnagrams(char *word) {
+    int length = strlen(word);
+    
+    // Масив для зберігання кількості повторень кожної букви
+    int frequency[26] = {0};
+
+    // Підрахунок кількості повторень кожної букви
+    for (int i = 0; i < length; i++) {
+        frequency[word[i] - 'A']++;
+    }
+    
+    // Обчислення кількості анаграм за формулою n! / (k1! * k2! * ... * kn!), де k1, k2, ..., kn - кількості повторень кожної букви
+    int anagramCount = factorial(length);
+    for (int i = 0; i < 26; i++) {
+        if (frequency[i] > 1) {
+            anagramCount /= factorial(frequency[i]);
+        }
+    }
+
+    return anagramCount;
+}
+
+int main() {
+    char word[15];
+    printf("Enter the word: ");
+    scanf("%s", word);
+
+    int result = countAnagrams(word);
+    printf("Number of anagrams: %d\n", result);
+
+    return 0;
+}
