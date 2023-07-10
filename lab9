@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int minSteps(int x, int y) {
+    // Різниця між x та y
+    int diff = y - x;
+
+    // Якщо різниця менше або дорівнює 2, потрібно лише 1 або 2 кроки
+    if (diff <= 2) {
+        return diff;
+    }
+
+    // Шукатимемо кількість кроків, яка є найближчою числу Фібоначчі
+    int fib1 = 1; // Перше число Фібоначчі
+    int fib2 = 2; // Друге число Фібоначчі
+    int steps = 2; // Початкова кількість кроків (1 і останній крок)
+
+    // Обчислення найближчого числа Фібоначчі, яке більше або рівне diff
+    while (fib2 < diff) {
+        int temp = fib2;
+        fib2 = fib1 + fib2;
+        fib1 = temp;
+        steps++;
+    }
+
+    return steps;
+}
+
+int main() {
+    int x, y;
+    printf("Enter the value of x: ");
+    scanf("%d", &x);
+    printf("Enter the value of y: ");
+    scanf("%d", &y);
+
+    if (x < 0 || y < 0 || y < x) {
+        printf("Invalid input data!\n");
+        return 1;
+    }
+
+    int result = minSteps(x, y);
+    printf("Minimum number of steps: %d\n", result);
+
+    return 0;
+}
